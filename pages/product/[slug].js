@@ -45,7 +45,9 @@ const ProductDetails = ({ product, relativeProducts }) => {
           {/* right column start */}
           <div className="flex-[1] py-3">
             {/* Product Title  */}
-            <div className="text-[34px] font-semibold mb-2 leading-tight">{p.name}</div>
+            <div className="text-[34px] font-semibold mb-2 leading-tight">
+              {p.name}
+            </div>
 
             {/* Product subtitle */}
             <div className="text-lg font-semibold mb-5">{p.subtitle}</div>
@@ -132,7 +134,7 @@ const ProductDetails = ({ product, relativeProducts }) => {
                     addToCart({
                       ...product?.data?.[0],
                       selectedSize,
-                      oneQuantityPrice: p.price
+                      oneQuantityPrice: p.price,
                     })
                   );
                   notify();
@@ -172,7 +174,7 @@ export default ProductDetails;
 export async function getStaticPaths() {
   const products = await fetchDataFromApi("/api/products?populate=*");
 
-  const paths = products.data.map((p) => ({
+  const paths = products?.data?.map((p) => ({
     params: {
       slug: p.attributes.slug,
     },
